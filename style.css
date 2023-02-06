@@ -65,7 +65,8 @@ button{
     font-weight: 700;
     cursor: pointer;
 }
-.forget-registr-box {
+.forget-registr-box,
+.back-login-page {
     width: 70%;
     height: 20px;
     margin-top: 10px;
@@ -73,7 +74,8 @@ button{
     justify-content: space-between;
 }
 .forget,
-.registr {
+.registr,
+.back-login {
     font-size: 12px;
     cursor: pointer;
 }
@@ -90,3 +92,20 @@ button{
     background: linear-gradient(to left, #434343, #000000);
     box-shadow: rgba(255, 255, 255, 0.45) 0px 4px 12px;
 }
+
+#register-box {
+    width: 30%;
+    height: 350px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f1f1;
+    background-color: olive;
+    background: #000000;
+    background: -webkit-linear-gradient(to left, #434343, #000000);
+    background: linear-gradient(to left, #434343, #000000);
+    box-shadow: rgba(255, 255, 255, 0.45) 0px 4px 12px;
+    border-radius: 5px;
+}
+
