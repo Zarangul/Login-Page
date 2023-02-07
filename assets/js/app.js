@@ -1,3 +1,5 @@
+// import {findMyAccount} from './modules/forgotPassword';
+
 let main = document.createElement("div");
 let login_box = document.createElement("div");
 let footer = document.createElement("div");
@@ -65,7 +67,7 @@ pbackLoginPage.append(backLogin);
 h1Tag.textContent = 'Javascript';
 h3Tag.textContent = 'LOG IN';
 logButton.textContent = 'Log in';
-forget.textContent = 'Forget password';
+forget.textContent = 'Forgot Password';
 register.textContent = 'Register';
 pTag.textContent = '© ZB';
 
@@ -73,11 +75,19 @@ h3TagR.textContent = 'Register';
 signupButton.textContent = 'Sign up';
 backLogin.textContent = 'Go to Login'
 
-let arr = [];
+if(JSON.parse(localStorage.getItem('users')) === null){
+    localStorage.setItem('users', JSON.stringify([]));
+}
+
+// Login part
+
 logButton.addEventListener('click', ()=>{
-    let obj = {id: Math.random(), username: user.value, password: userPassword.value}
-    arr.push(obj);
-    console.log(arr);
+    let allUsers = JSON.parse(localStorage.getItem('users'));
+
+    let currentUser = allUsers.find(item => item.password === userPassword.value && item.username === user.value);
+    localStorage.setItem('current', JSON.stringify(currentUser));
+
+    currentUser ? window.location.href = 'user.html' : alert('It is wrong')
 })
 logButton.addEventListener('mouseover', ()=>{
     logButton.style.backgroundColor = '#707000';
@@ -86,6 +96,8 @@ logButton.addEventListener('mouseover', ()=>{
 logButton.addEventListener('mouseleave', ()=>{
     logButton.style.backgroundColor = '#808000';
 })
+
+// forget part
 
 forget.addEventListener('mouseover', ()=>{
     forget.style.textDecoration = 'underline';
@@ -96,8 +108,13 @@ forget.addEventListener('mouseleave', ()=>{
 })
 
 forget.addEventListener('click', ()=>{
-    alert('...soon!');
-})
+    user.value || alert('Please enter username');
+    let allUsers = JSON.parse(localStorage.getItem('users'));
+
+    let findUser = allUsers.find(item => item.username === user.value);
+
+    alert(findUser.password);
+})  //findMyAccount(user.value)
 
 register.addEventListener('mouseover', ()=>{
     register.style.textDecoration = 'underline';
@@ -109,6 +126,19 @@ register.addEventListener('mouseleave', ()=>{
 register.addEventListener('click', ()=>{
     login_box.style.display = 'none';
     register_box.style.display = 'flex';
+})
+
+
+// Register part
+
+signupButton.addEventListener('click', () =>{
+    let oldUsers =  JSON.parse(localStorage.getItem('users'));
+    let newPerson = {
+        name: name.value,
+        username: userReg.value,
+        password: userPasswordReg.value
+    }
+    localStorage.setItem('users', JSON.stringify([...oldUsers, newPerson]));
 })
 
 signupButton.addEventListener('mouseover', ()=>{
